@@ -22,11 +22,42 @@ call vundle#begin('~/.vim/bundle')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" may be the best git wrapper all the time
+Plugin 'tpope/vim-fugitive'
+
 " airline, heard of it
-"Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline'
+let g:airline_powerline_fonts = 0
+
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#branch#enabled = 1
+"let g:airline#extensions#whitespace#enabled=0
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>p :bp<CR>
 
 " YouCompleteMe, as real as the name
 Plugin 'Valloric/YouCompleteMe'
+" set global ycm configuration files
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0
+let g:ycm_filetype_blacklist = {
+      \ 'foo' : 1,
+      \ 'bar' : 1,
+      \}
+" use <cr> to selct one item
+inoremap <expr> <CR>        pumvisible() ? "\<C-y>" : "\<CR>"
+autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+"let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+let g:ycm_key_list_stop_completion = ['<CR>']
+" don't preview the GoToDefinitionElseDeclaration part auto
+set completeopt=menu,menuone
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_cache_omnifunc=0
+"nnoremap <c-i> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 call vundle#end()          " required
 filetype plugin indent on  " required
@@ -50,19 +81,19 @@ filetype plugin indent on  " required
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " deletion of the .netrwhist file
-au VimLeave * if filereadable("/Users/hacker/.vim/.netrwhist") | call delete("/Users/hacker/.vim/.netrwhist") | endif 
+"au VimLeave * if filereadable("/Users/hacker/.vim/.netrwhist") | call delete("/Users/hacker/.vim/.netrwhist") | endif 
 
 " for some purpose I need to cancel the spell opt
 "set spell
 
 " I do not know what is this line resulted in
-"set backspace=2		" more powerful backspacing
+" more powerful backspacing
+set backspace=indent,eol,start
 
-" colorscheme
-hi Comment ctermfg=grey guifg=#808080
 
 " set key map
 nmap q: :q
+
 
 " Below is functional customize area
 set showmode
@@ -73,9 +104,11 @@ set autoindent
 set smartindent
 set ruler
 set number
-set showcmd
+set noshowcmd
 set textwidth=79
 set fileformat=unix
 syntax on
 
+" colorscheme
 hi Comment ctermfg=grey guifg=#808080
+
