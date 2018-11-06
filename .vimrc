@@ -25,6 +25,10 @@ Plugin 'VundleVim/Vundle.vim'
 " may be the best git wrapper all the time
 Plugin 'tpope/vim-fugitive'
 
+" allows us to be much quicker to traversing our pages
+Plugin 'easymotion/vim-easymotion'
+map <Leader> <Plug>(easymotion-prefix)
+
 " airline, heard of it
 Plugin 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 0
@@ -105,10 +109,15 @@ set smartindent
 set ruler
 set number
 set noshowcmd
-set textwidth=79
+" it will automatically wrap if line length is less than the number
+"set textwidth=79
 set fileformat=unix
+let python_highlight_all=1
+"set nowrap
 syntax on
 
 " colorscheme
 hi Comment ctermfg=grey guifg=#808080
 
+" run python3 codes
+nnoremap <leader>run<cr> :set splitbelow<cr>:terminal python3 %<cr>
