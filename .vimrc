@@ -51,7 +51,8 @@ let g:ycm_filetype_blacklist = {
       \}
 let g:ycm_key_invoke_completion = '<C-b>'
 " completion start with {num} words
-let g:ycm_min_num_identifier_candidate_chars = 1
+"let g:ycm_min_num_identifier_candidate_chars = 1
+let g:ycm_min_num_of_chars_for_completion=1
 let g:ycm_cache_omnifunc = 0
 " use <cr> to selct one item
 inoremap <expr> <CR>        pumvisible() ? "\<C-y>" : "\<CR>"
@@ -64,7 +65,7 @@ set completeopt=menu,menuone
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
-let g:ycm_cache_omnifunc=0
+let g:ycm_cache_omnifunc = 0
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "let g:ycm_server_python_interpreter='python3'
 
@@ -107,11 +108,11 @@ nmap q: :q
 nmap ; <Leader>
 
 " set little trick autocomplete
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
-inoremap { {}<Esc>i
-inoremap " ""<Esc>i
-inoremap ' ''<Esc>i
+"inoremap ( ()<Esc>i
+"inoremap [ []<Esc>i
+"inoremap { {}<Esc>i
+"inoremap " ""<Esc>i
+"inoremap ' ''<Esc>i
 
 " Below is functional customize area
 set showmode
