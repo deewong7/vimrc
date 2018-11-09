@@ -22,21 +22,89 @@ call vundle#begin('~/.vim/bundle')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" may be the best git wrapper all the time
-Plugin 'tpope/vim-fugitive'
+
+" NERDTree, nice filesystem manager
+Plugin 'scrooloose/nerdtree'
+" toggle NERDTree automatically when vim starts up
+autocmd vimenter * NERDTree
+" go to the previous (last accessed) window
+autocmd vimenter * wincmd p
+
+" toggle NERDTree automatically when vim starts up without specific file(s)
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" NERDTree auto quit when it is the last buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" cmap for NERDTreeToggle
+" it might not be apropriate for the those commands starts with 'n'
+"cmap nd NERDTree
+" nmap for NERDTreeToggle
+"nmap <leader>file :NERDTreeToggle<cr>
+" clearly the line below is the most comfortable part
+nmap <bar> :NERDTreeToggle<cr>
+
+" NERDTree configuration
+let g:NERDTreeWinSize = 28
+let g:NERDTreeWinPos = 'right'
+
+" NERDTree colorscheme
+hi Directory term=bold ctermfg=14 guifg=Cyan
+
+" NERDcommenter, not that bad, kuh-huh?
+Plugin 'scrooloose/nerdcommenter'
+
+" if set to 0, none of the default mappings will be created
+let g:NERDCreateDefaultMappings = 0
+" use the first-time way to comment/decomment
+"map <D-kDivide> <Plug>NERDCommenterToggle
+map <leader>cc <plug>NERDCommenterComment
+map <leader>cA <plug>NERDCommenterAppend
+map <leader>uc <plug>NERDCommenterUncomment
+
+" add space spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" enable trimming trailing whitespaces when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
 
 " allows us to be much quicker to traversing our pages
 Plugin 'easymotion/vim-easymotion'
-map <Leader> <Plug>(easymotion-prefix)
+
+" set this option to 0
+" if you want to disable the default mappings
+" and customize your key-mappings yourself
+let g:EasyMotion_do_mapping = 0
+
+" you can know it from its name
+let g:EasyMotion_disable_two_key_combo = 1
+
+" change the default leader key of easymotion
+" also, you can do this by customize easymotion keys
+" map your_key <Plug>(easymotion-the_key_you_want_to_replace)
+map <leader> <Plug>(easymotion-prefix)
+
+" customize key-mappings myself
+nmap <leader>f <Plug>(easymotion-f)
+nmap <leader>F <Plug>(easymotion-F)
+nmap <leader>w <Plug>(easymotion-w)
+nmap <leader>W <Plug>(easymotion-W)
+nmap <leader>b <Plug>(easymotion-b)
+nmap <leader>B <Plug>(easymotion-B)
+nmap <leader>j <Plug>(easymotion-j)
+nmap <leader>k <Plug>(easymotion-k)
+
 
 " airline, heard of it
 Plugin 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 0
-
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#branch#enabled = 1
-"let g:airline#extensions#whitespace#enabled=0
+" no need for that now
+"let g:airline#extensions#whitespace#enabled = 0
+"let g:airline#extensions#whitespace#symbol = '!'
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
 
@@ -66,8 +134,11 @@ let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_cache_omnifunc = 0
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>go<cr> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "let g:ycm_server_python_interpreter='python3'
+
+" may be the best git wrapper all the time
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()          " required
 filetype plugin indent on  " required
@@ -106,6 +177,7 @@ nmap q: :q
 
 " set leader mapping
 nmap ; <Leader>
+let g:mapleader = ";"
 
 " set little trick autocomplete
 "inoremap ( ()<Esc>i
@@ -124,6 +196,7 @@ set smartindent
 set ruler
 set number
 set noshowcmd
+set foldenable
 " it will automatically wrap if line length is less than the number
 "set textwidth=79
 set fileformat=unix
@@ -134,6 +207,15 @@ syntax on
 " colorscheme
 hi Comment ctermfg=grey guifg=#808080
 
+" nerdtree vertical styles
+"set fillchars=vert:\|
+set fillchars=vert:\ 
+hi VertSplit ctermfg=grey ctermbg=black
+
 " run python3 codes
 nnoremap <leader>run<cr> :set splitbelow<cr>:terminal python3 %<cr>
 
+" vim delete all buffers with NERDTree toggled
+noremap <leader>x :bp<cr>:bd #<cr>
+
+" no matter what, the <D> comand just don't work
