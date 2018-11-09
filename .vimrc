@@ -212,6 +212,13 @@ hi Comment ctermfg=grey guifg=#808080
 set fillchars=vert:\ 
 hi VertSplit ctermfg=grey ctermbg=black
 
+" wincmd for navigate between splits
+noremap <c-h> :wincmd h<cr>
+noremap <c-j> :wincmd j<cr>
+noremap <c-k> :wincmd k<cr>
+noremap <c-l> :wincmd l<cr>
+noremap <c-r> :wincmd r<cr>
+
 " run python3 codes
 nnoremap <leader>run<cr> :set splitbelow<cr>:terminal python3 %<cr>
 
