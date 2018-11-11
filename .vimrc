@@ -63,7 +63,8 @@ map <leader>cA <plug>NERDCommenterAppend
 map <leader>uc <plug>NERDCommenterUncomment
 
 " add space spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
+" for python scripts, there is no need to do this
+let g:NERDSpaceDelims = 0
 
 " enable trimming trailing whitespaces when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
@@ -217,7 +218,7 @@ noremap <c-h> :wincmd h<cr>
 noremap <c-j> :wincmd j<cr>
 noremap <c-k> :wincmd k<cr>
 noremap <c-l> :wincmd l<cr>
-noremap <c-r> :wincmd r<cr>
+"noremap <c-r> :wincmd r<cr>
 
 " run python3 codes
 nnoremap <leader>run<cr> :set splitbelow<cr>:terminal python3 %<cr>
