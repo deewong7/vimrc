@@ -200,6 +200,7 @@ set number
 set noshowcmd
 set foldenable
 set splitbelow
+set scrolloff=999
 " it will automatically wrap if line length is less than the number
 "set textwidth=79
 set fileformat=unix
@@ -231,4 +232,9 @@ nnoremap <leader>run<cr> :set splitbelow<cr>:terminal python3 %<cr>
 " vim delete all buffers with NERDTree toggled
 noremap <leader>x :bp<cr>:bd #<cr>
 
-" no matter what, the <D> comand just don't work
+" remember the last postion when reopen the file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+
+" no matter what, the <D> command just don't work
