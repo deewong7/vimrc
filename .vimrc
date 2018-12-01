@@ -49,7 +49,7 @@ let g:NERDTreeWinSize = 28
 let g:NERDTreeWinPos = 'right'
 
 " NERDTree colorscheme
-hi Directory term=bold ctermfg=14 guifg=Cyan
+hi Directory term=bold ctermfg=darkcyan guifg=Cyan
 
 " NERDcommenter, not that bad, kuh-huh?
 Plugin 'scrooloose/nerdcommenter'
@@ -106,8 +106,8 @@ let g:airline#extensions#branch#enabled = 1
 " no need for that now
 "let g:airline#extensions#whitespace#enabled = 0
 "let g:airline#extensions#whitespace#symbol = '!'
-nnoremap <Leader>n :bn<CR>
-nnoremap <Leader>p :bp<CR>
+nnoremap <Leader>n :bn!<CR>
+nnoremap <Leader>p :bp!<CR>
 
 " YouCompleteMe, as real as the name
 Plugin 'Valloric/YouCompleteMe'
@@ -178,6 +178,7 @@ nmap q: :q
 
 " set leader mapping
 nmap ; <Leader>
+vmap ; <Leader>
 let g:mapleader = ";"
 
 " set little trick autocomplete
@@ -198,6 +199,7 @@ set ruler
 set number
 set noshowcmd
 set foldenable
+set splitbelow
 " it will automatically wrap if line length is less than the number
 "set textwidth=79
 set fileformat=unix
@@ -206,7 +208,10 @@ let python_highlight_all=1
 syntax on
 
 " colorscheme
+"hi Comment ctermfg=241 guifg=#808080
 hi Comment ctermfg=grey guifg=#808080
+hi String term=underline ctermfg=yellow guifg=darkyellow
+hi LineNr term=underline ctermfg=lightcyan guifg=Brown
 
 " nerdtree vertical styles
 "set fillchars=vert:\|
