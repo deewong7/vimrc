@@ -45,7 +45,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 nmap <bar> :NERDTreeToggle<cr>
 
 " NERDTree configuration
-let g:NERDTreeWinSize = 28
+let g:NERDTreeWinSize = 23
 let g:NERDTreeWinPos = 'right'
 
 " NERDTree colorscheme
@@ -103,6 +103,9 @@ let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#branch#enabled = 1
+" airline checks file type to alternatively count words
+"let g:airline#extensions#wordcount#enabled = 0
+
 " no need for that now
 "let g:airline#extensions#whitespace#enabled = 0
 "let g:airline#extensions#whitespace#symbol = '!'
@@ -227,7 +230,7 @@ noremap <c-l> :wincmd l<cr>
 "noremap <c-r> :wincmd r<cr>
 
 " run python3 codes
-nnoremap <leader>run<cr> :set splitbelow<cr>:terminal python3 %<cr>
+nnoremap <leader>run<cr> :w<cr>:set splitbelow<cr>:terminal python3 %<cr>
 
 " vim delete all buffers with NERDTree toggled
 noremap <leader>x :bp<cr>:bd #<cr>
@@ -238,3 +241,4 @@ if has("autocmd")
 endif
 
 " no matter what, the <D> command just don't work
+"
