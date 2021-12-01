@@ -26,7 +26,8 @@ Plugin 'VundleVim/Vundle.vim'
 " NERDTree, nice filesystem manager
 Plugin 'scrooloose/nerdtree'
 " toggle NERDTree automatically when vim starts up
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
+
 " go to the previous (last accessed) window
 autocmd vimenter * wincmd p
 
@@ -112,34 +113,34 @@ let g:airline#extensions#branch#enabled = 1
 nnoremap <Leader>n :bn!<CR>
 nnoremap <Leader>p :bp!<CR>
 
-" YouCompleteMe, as real as the name
-Plugin 'Valloric/YouCompleteMe'
-" set global ycm configuration files
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf=0
-let g:ycm_filetype_blacklist = {
-      \ 'foo' : 1,
-      \ 'bar' : 1,
-      \}
-let g:ycm_key_invoke_completion = '<C-b>'
-" completion start with {num} words
-"let g:ycm_min_num_identifier_candidate_chars = 1
-let g:ycm_min_num_of_chars_for_completion=1
-let g:ycm_cache_omnifunc = 0
-" use <cr> to selct one item
-inoremap <expr> <CR>        pumvisible() ? "\<C-y>" : "\<CR>"
-autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
-"let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
-"let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-let g:ycm_key_list_stop_completion = ['<CR>']
-" don't preview the GoToDefinitionElseDeclaration part auto
-set completeopt=menu,menuone
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_cache_omnifunc = 0
-nnoremap <leader>go<cr> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"let g:ycm_server_python_interpreter='python3'
+"" YouCompleteMe, as real as the name
+"Plugin 'Valloric/YouCompleteMe'
+"" set global ycm configuration files
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+"let g:ycm_confirm_extra_conf=0
+"let g:ycm_filetype_blacklist = {
+      "\ 'foo' : 1,
+      "\ 'bar' : 1,
+      "\}
+"let g:ycm_key_invoke_completion = '<C-b>'
+"" completion start with {num} words
+""let g:ycm_min_num_identifier_candidate_chars = 1
+"let g:ycm_min_num_of_chars_for_completion=1
+"let g:ycm_cache_omnifunc = 0
+"" use <cr> to selct one item
+"inoremap <expr> <CR>        pumvisible() ? "\<C-y>" : "\<CR>"
+"autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+""let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+""let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+"let g:ycm_key_list_stop_completion = ['<CR>']
+"" don't preview the GoToDefinitionElseDeclaration part auto
+"set completeopt=menu,menuone
+"let g:ycm_add_preview_to_completeopt = 0
+"let g:ycm_complete_in_comments = 1
+"let g:ycm_complete_in_strings = 1
+"let g:ycm_cache_omnifunc = 0
+"nnoremap <leader>go<cr> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+""let g:ycm_server_python_interpreter='python3'
 
 " may be the best git wrapper all the time
 Plugin 'tpope/vim-fugitive'
@@ -241,4 +242,3 @@ if has("autocmd")
 endif
 
 " no matter what, the <D> command just don't work
-"
