@@ -242,3 +242,8 @@ if has("autocmd")
 endif
 
 " no matter what, the <D> command just don't work
+
+set fillchars=vert:\ ,eob:\ 
+
+
+
