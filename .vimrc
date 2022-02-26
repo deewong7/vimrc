@@ -245,5 +245,6 @@ endif
 
 set fillchars=vert:\ ,eob:\ 
 
+set relativenumber
 
 
