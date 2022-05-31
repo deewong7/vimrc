@@ -18,6 +18,16 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin('~/.vim/bundle')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('some/path/to/install')
+"
+
+" A good vim-plugin manager (one-line)
+call plug#begin('~/.vim/plugged')
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tomasiser/vim-code-dark'
+
+call plug#end()
+
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -26,10 +36,10 @@ Plugin 'VundleVim/Vundle.vim'
 " NERDTree, nice filesystem manager
 Plugin 'scrooloose/nerdtree'
 " toggle NERDTree automatically when vim starts up
+" and go to the previous (last accessed) window
 "autocmd vimenter * NERDTree
+"autocmd vimenter * wincmd p
 
-" go to the previous (last accessed) window
-autocmd vimenter * wincmd p
 
 " toggle NERDTree automatically when vim starts up without specific file(s)
 "autocmd StdinReadPre * let s:std_in=1
@@ -49,9 +59,6 @@ nmap <bar> :NERDTreeToggle<cr>
 let g:NERDTreeWinSize = 23
 let g:NERDTreeWinPos = 'right'
 
-" NERDTree colorscheme
-hi Directory term=bold ctermfg=darkcyan guifg=Cyan
-
 " NERDcommenter, not that bad, kuh-huh?
 Plugin 'scrooloose/nerdcommenter'
 
@@ -60,7 +67,7 @@ let g:NERDCreateDefaultMappings = 0
 " use the first-time way to comment/decomment
 "map <D-kDivide> <Plug>NERDCommenterToggle
 map <leader>cc <plug>NERDCommenterComment
-map <leader>cA <plug>NERDCommenterAppend
+"map <leader>cA <plug>NERDCommenterAppend
 map <leader>uc <plug>NERDCommenterUncomment
 
 " add space spaces after comment delimiters by default
@@ -96,6 +103,7 @@ nmap <leader>b <Plug>(easymotion-b)
 nmap <leader>B <Plug>(easymotion-B)
 nmap <leader>j <Plug>(easymotion-j)
 nmap <leader>k <Plug>(easymotion-k)
+nmap <leader>ge <Plug>(easymotion-ge)
 
 
 " airline, heard of it
@@ -110,37 +118,9 @@ let g:airline#extensions#branch#enabled = 1
 " no need for that now
 "let g:airline#extensions#whitespace#enabled = 0
 "let g:airline#extensions#whitespace#symbol = '!'
+
 nnoremap <Leader>n :bn!<CR>
 nnoremap <Leader>p :bp!<CR>
-
-"" YouCompleteMe, as real as the name
-"Plugin 'Valloric/YouCompleteMe'
-"" set global ycm configuration files
-"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-"let g:ycm_confirm_extra_conf=0
-"let g:ycm_filetype_blacklist = {
-      "\ 'foo' : 1,
-      "\ 'bar' : 1,
-      "\}
-"let g:ycm_key_invoke_completion = '<C-b>'
-"" completion start with {num} words
-""let g:ycm_min_num_identifier_candidate_chars = 1
-"let g:ycm_min_num_of_chars_for_completion=1
-"let g:ycm_cache_omnifunc = 0
-"" use <cr> to selct one item
-"inoremap <expr> <CR>        pumvisible() ? "\<C-y>" : "\<CR>"
-"autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
-""let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
-""let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-"let g:ycm_key_list_stop_completion = ['<CR>']
-"" don't preview the GoToDefinitionElseDeclaration part auto
-"set completeopt=menu,menuone
-"let g:ycm_add_preview_to_completeopt = 0
-"let g:ycm_complete_in_comments = 1
-"let g:ycm_complete_in_strings = 1
-"let g:ycm_cache_omnifunc = 0
-"nnoremap <leader>go<cr> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-""let g:ycm_server_python_interpreter='python3'
 
 " may be the best git wrapper all the time
 Plugin 'tpope/vim-fugitive'
@@ -174,10 +154,10 @@ filetype plugin indent on  " required
 
 " I do not know what is this line resulted in
 " more powerful backspacing
-set backspace=indent,eol,start
+"set backspace=indent,eol,start
 
 
-" set key mapping
+" correct typos
 nmap q: :q
 
 " set leader mapping
@@ -186,11 +166,11 @@ vmap ; <Leader>
 let g:mapleader = ";"
 
 " set little trick autocomplete
-"inoremap ( ()<Esc>i
-"inoremap [ []<Esc>i
-"inoremap { {}<Esc>i
-"inoremap " ""<Esc>i
-"inoremap ' ''<Esc>i
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
+inoremap " ""<Esc>i
+inoremap ' ''<Esc>i
 
 " Below is functional customize area
 set showmode
@@ -201,6 +181,7 @@ set autoindent
 set smartindent
 set ruler
 set number
+set relativenumber
 set noshowcmd
 set foldenable
 set splitbelow
@@ -212,39 +193,77 @@ let python_highlight_all=1
 "set nowrap
 syntax on
 
-" colorscheme
-"hi Comment ctermfg=241 guifg=#808080
-hi Comment ctermfg=grey guifg=#808080
-hi String term=underline ctermfg=yellow guifg=darkyellow
-hi LineNr term=underline ctermfg=lightcyan guifg=Brown
-
-" nerdtree vertical styles
-"set fillchars=vert:\|
-set fillchars=vert:\ 
-hi VertSplit ctermfg=grey ctermbg=black
-
 " wincmd for navigate between splits
-noremap <c-h> :wincmd h<cr>
-noremap <c-j> :wincmd j<cr>
-noremap <c-k> :wincmd k<cr>
-noremap <c-l> :wincmd l<cr>
+"noremap <c-h> :wincmd h<cr>
+"noremap <c-j> :wincmd j<cr>
+"noremap <c-k> :wincmd k<cr>
+"noremap <c-l> :wincmd l<cr>
+"
 "noremap <c-r> :wincmd r<cr>
 
 " run python3 codes
-nnoremap <leader>run<cr> :w<cr>:set splitbelow<cr>:terminal python3 %<cr>
+"nnoremap <leader>run<cr> :w<cr>:set splitbelow<cr>:terminal python3 %<cr>
 
 " vim delete all buffers with NERDTree toggled
 noremap <leader>x :bp<cr>:bd #<cr>
 
 " remember the last postion when reopen the file
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+  au bufreadpost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 
 " no matter what, the <D> command just don't work
 
-set fillchars=vert:\ ,eob:\ 
+set fillchars=vert:\ ,eob:\
 
-set relativenumber
+"set clipboard=unnamed
 
 
+
+"
+"""""""""""""""""""""
+" GUI & Colorscheme "
+"""""""""""""""""""""
+" For the comment color
+"hi Comment ctermfg=241 guifg=#808080
+"hi Comment ctermfg=grey guifg=#808080
+"hi String term=underline ctermfg=yellow guifg=darkyellow
+"hi LineNr term=underline ctermfg=lightcyan guifg=Brown
+
+" nerdtree vertical styles
+"set fillchars=vert:\|
+
+
+" commented out to reset the vscode-like color
+"highlight Pmenu ctermbg=gray ctermfg=gray
+"highlight PmenuSel ctermbg=white
+
+" Reset the color for the `codedark`
+set t_Co=256
+set t_ut=
+
+"vscode-like theme
+colorscheme codedark
+
+" NERDTree colorscheme
+" currently use the default `vscode-like` color
+
+" change the VertSplit in the NERDTree
+set fillchars=vert:\ 
+"hi VertSplit ctermfg=grey
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+"end use <tab> for trigger completion and navigate to the next complete item
+
+abbr teh the
+
+set tw=80
