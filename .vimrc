@@ -23,7 +23,7 @@ call vundle#begin('~/.vim/bundle')
 " A good vim-plugin manager (one-line)
 call plug#begin('~/.vim/plugged')
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tomasiser/vim-code-dark'
 
 call plug#end()
